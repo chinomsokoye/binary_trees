@@ -46,9 +46,9 @@ bst_t *bst_remove(bst_t *root, int value)
  */
 bst_t *bst_min_val(bst_t *root)
 {
-	bst_t *minimum = root;
+	bst_t *min = root;
 
-	while (minimum->left)
-		minimum = minimum->left;
-	return (minimum);
+	while (min->left)
+		min = min->left;
+	return (min);
 }
