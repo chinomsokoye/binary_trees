@@ -9,12 +9,15 @@
  */
 bst_t *bst_insert(bst_t **tree, int value)
 {
-	bst_t *temp = *tree;
+	bst_t *temp = NULL;
 	bst_t *second = NULL;
-	bst_t *new = binary_tree_node(NULL, value);
+	bst_t *new = NULL;
 
-	if (*tree == NULL)
-		*tree = new;
+	if (!tree)
+		return (NULL);
+	else if (*tree == NULL)
+		return (*tree = binary_tree_node(NULL, value));
+	temp = *tree;
 	while (temp)
 	{
 		second = temp;
@@ -25,6 +28,7 @@ bst_t *bst_insert(bst_t **tree, int value)
 		else if (value == temp->n)
 			return (NULL);
 	}
+	new = binary_tree_node(NULL, value);
 	if (second == NULL)
 		second = new;
 	else if (value < second->n)
@@ -56,14 +60,14 @@ avl_t *avl_insert(avl_t **tree, int value)
 
 	if (balance > 1 && value < node->left->n)
 		return (binary_tree_rotate_right(node));
-	else if (balance < -1 && value > node->right->n)
+	if (balance < -1 && value > node->right->n)
 		return (binary_tree_rotate_left(node));
-	else if (balance > 1 && value > node->left->n)
+	if (balance > 1 && value > node->left->n)
 	{
 		node->left = binary_tree_rotate_left(node->left);
 		return (binary_tree_rotate_right(node));
 	}
-	else if (balance < -1 && value < node->right->n)
+	if (balance < -1 && value < node->right->n)
 	{
 		node->right = binary_tree_rotate_right(node->right);
 		return (binary_tree_rotate_left(node));
